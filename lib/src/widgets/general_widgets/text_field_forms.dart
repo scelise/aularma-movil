@@ -12,12 +12,14 @@ class TextFieldForms extends StatefulWidget {
   final TextEditingController controller;
   final bool bIsPassword;
   final String sLabel;
+  final double dWidth;
 
   const TextFieldForms(
     {
       super.key,
       required this.controller,
       required this.sLabel,
+      this.dWidth = 312.0,
       this.bIsPassword = false
     }
   );
@@ -34,7 +36,7 @@ class _TextFieldFormsState extends State<TextFieldForms> {
   Widget build( BuildContext context ) {
 
     return SizedBox(
-      width: ResponsiveApp.dWidth( 312.0 ),
+      width: ResponsiveApp.dWidth( widget.dWidth ),
       child: TextFormField(
         controller: widget.controller,
         obscureText: widget.bIsPassword ? bObscure : false,

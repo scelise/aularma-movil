@@ -8,6 +8,8 @@ import '../widgets/general_widgets/text_field_forms.dart';
 import '../widgets/login_widgets/create_account_button.dart';
 import '../widgets/login_widgets/reset_password_button.dart';
 
+import 'main_page.dart';
+
 class LoginPage extends StatelessWidget {
 
   LoginPage( { super.key } );
@@ -38,7 +40,7 @@ class LoginPage extends StatelessWidget {
             const ResetPasswordButton(),
             MainButton(
               sLabel: 'Iniciar sesión',
-              onPressed: () {},
+              onPressed: () => Navigator.pushReplacement( context, MaterialPageRoute( builder: (_) => const MainPage() ) ),
             ),
             SizedBox( height: ResponsiveApp.dHeight( 16.0 ) ),
             const CreateAccountButton()
