@@ -1,7 +1,12 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'src/pages/login_page.dart';
+
+import 'src/providers/alarm_provider.dart';
 
 import 'src/utils/colors_app.dart';
 import 'src/utils/responsive_app.dart';
@@ -51,17 +56,29 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build( BuildContext context ) {
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Aularma',
-      home: LoginPage(),
-      theme: ThemeData(
-        scaffoldBackgroundColor: ColorsApp.backgroundColor,
-        textSelectionTheme: TextSelectionThemeData(
-          cursorColor: ColorsApp.secondaryColor,
-          selectionColor: ColorsApp.primaryColor.withValues( alpha: 0.2 ),
-          selectionHandleColor: ColorsApp.primaryColor
-        )
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider( create: ( _ ) => AlarmProvider() )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Aularma',
+        home: LoginPage(),
+        theme: ThemeData(
+          scaffoldBackgroundColor: ColorsApp.backgroundColor,
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: ColorsApp.secondaryColor,
+            selectionColor: ColorsApp.primaryColor.withValues( alpha: 0.2 ),
+            selectionHandleColor: ColorsApp.primaryColor
+          )
+        ),
+        supportedLocales: const [
+          Locale('en', 'US'),
+          Locale('es', 'ES')
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate
+        ]
       )
     );
   

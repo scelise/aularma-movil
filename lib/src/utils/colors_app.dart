@@ -10,5 +10,7 @@ class ColorsApp {
   static const secondaryColor = Color(0xff41444F);
   static const backgroundColor = Colors.white;
   static const borderColor = Color(0xffA7AAB5);
+  static const inactiveColor = Color(0xffE2E3E6);
+  static const cardBackgroundColor = Color(0xffF5F5F5);
 
 }
