@@ -1,0 +1,1 @@
+C:\Flutter\aularma_movil\build\app\intermediates\cxx\Debug\6p4v15m5\obj\arm64-v8a
