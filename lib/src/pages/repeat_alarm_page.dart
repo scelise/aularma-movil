@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../utils/colors_app.dart';
+import '../utils/functions.dart';
 import '../utils/responsive_app.dart';
 
 import '../widgets/general_widgets/poppins_text.dart';
+import '../widgets/alarm_widgets/bottom_sheet_custom_repeat.dart';
 
 class RepeatAlarmPage extends StatefulWidget {
 
@@ -20,6 +22,8 @@ class _RepeatAlarmPageState extends State<RepeatAlarmPage> {
   List<String> lOptions = ["Una vez", "Diariamente", "Lunes a Viernes", "Personalizar"];
 
   int bSelected = 0;
+
+  final functions = Functions();
 
   @override
   Widget build( BuildContext context ) {
@@ -43,7 +47,7 @@ class _RepeatAlarmPageState extends State<RepeatAlarmPage> {
               setState( () => bSelected = index );
 
               if ( lOptions[index] == "Personalizar" ) {
-                
+                functions.showBottomSheet( context, BottomSheetCustomRepeat() );
               }
 
             },

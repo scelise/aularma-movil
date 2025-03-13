@@ -12,17 +12,21 @@ class TextFieldForms extends StatefulWidget {
   final TextEditingController controller;
   final bool bIsPassword;
   final bool bEnabled;
+  final bool bError;
   final String sLabel;
   final double dWidth;
+  final String? Function(String?)? validator;
 
   const TextFieldForms(
     {
       super.key,
       required this.controller,
       required this.sLabel,
+      this.validator,
       this.dWidth = 312.0,
       this.bIsPassword = false,
-      this.bEnabled = true
+      this.bEnabled = true,
+      this.bError = false
     }
   );
 
@@ -40,6 +44,7 @@ class _TextFieldFormsState extends State<TextFieldForms> {
     return SizedBox(
       width: ResponsiveApp.dWidth( widget.dWidth ),
       child: TextFormField(
+        validator: widget.validator,
         enabled: widget.bEnabled,
         controller: widget.controller,
         obscureText: widget.bIsPassword ? bObscure : false,
@@ -57,7 +62,16 @@ class _TextFieldFormsState extends State<TextFieldForms> {
             borderRadius: BorderRadius.circular( 8.0 ),
             borderSide: const BorderSide( color: ColorsApp.borderColor)
           ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular( 8.0 ),
+            borderSide: const BorderSide( color: ColorsApp.borderColor)
+          ),
+          errorStyle: GoogleFonts.poppins(),
           focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular( 8.0 ),
+            borderSide: const BorderSide( color: ColorsApp.secondaryColor, width: 3.0 )
+          ),
+          focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular( 8.0 ),
             borderSide: const BorderSide( color: ColorsApp.secondaryColor, width: 3.0 )
           ),
@@ -72,6 +86,10 @@ class _TextFieldFormsState extends State<TextFieldForms> {
               bObscure ? Icons.visibility_off : Icons.visibility,
               color: ColorsApp.primaryColor
             )
+          ) : widget.bError ? Icon(
+            Icons.error_rounded,
+            color: ColorsApp.errorColor,
+            size: ResponsiveApp.dSize( 24.0 )
           ) : const SizedBox()
         )
       )

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/alarm_provider.dart';
 import '../utils/colors_app.dart';
 import '../utils/responsive_app.dart';
 import '../utils/slide_transition.dart';
@@ -30,6 +32,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build( BuildContext context ) {
+
+    final alarmProvider = Provider.of<AlarmProvider>( context );
 
     return Scaffold(
       appBar: AppBar(
@@ -93,7 +97,10 @@ class _MainPageState extends State<MainPage> {
       ),
       body: lPages.elementAt( iIndexNavigation ),
       floatingActionButton: iIndexNavigation == 0 ? FloatingActionButton(
-        onPressed: () => Navigator.push( context, SlidePageRoute( page: const CreateAlarmPage() ) ),
+        onPressed: () {
+          alarmProvider.lSubtask.clear();
+          Navigator.push( context, SlidePageRoute( page: const CreateAlarmPage() ) );
+        },
         backgroundColor: ColorsApp.backgroundColor,
         child: Icon( Icons.add_rounded, color: ColorsApp.primaryColor, size: ResponsiveApp.dSize( 24.0 ) )
       ) : const SizedBox()

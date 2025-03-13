@@ -1,3 +1,4 @@
+import 'package:aularma_movil/src/widgets/alarm_widgets/checkbox_item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -10,11 +11,14 @@ import '../classes/alarm.dart';
 import '../providers/alarm_provider.dart';
 
 import '../utils/colors_app.dart';
+import '../utils/functions.dart';
 import '../utils/responsive_app.dart';
 
 import '../utils/slide_transition.dart';
+import '../widgets/alarm_widgets/bottom_sheet_subtask.dart';
 import '../widgets/general_widgets/poppins_text.dart';
 import '../widgets/general_widgets/text_field_forms.dart';
+
 import 'repeat_alarm_page.dart';
 
 class CreateAlarmPage extends StatefulWidget {
@@ -30,7 +34,12 @@ class _CreateAlarmPageState extends State<CreateAlarmPage> {
 
   DateTime? sHour;
 
+  bool bError = false;
+
+  final _formKey = GlobalKey<FormState>();
+
   final nameController = TextEditingController();
+  final functions = Functions();
 
   @override
   Widget build( BuildContext context ) {
@@ -48,15 +57,20 @@ class _CreateAlarmPageState extends State<CreateAlarmPage> {
         actions: [
            IconButton(
             onPressed: () {
-              alarmProvider.lAlarms.add(
-                Alarm(
-                  sName: nameController.text,
-                  sHour: sHour
-                )
-              );
-              alarmProvider.lAlarms.sort( ( a, b ) => a.sHour!.compareTo( b.sHour! ) );
-              alarmProvider.lAlarms = alarmProvider.lAlarms;
-              Navigator.pop( context );
+              if( _formKey.currentState!.validate() ) {
+
+                alarmProvider.lAlarms.add(
+                  Alarm(
+                    sName: nameController.text,
+                    sHour: sHour
+                  )
+                );
+                alarmProvider.lAlarms.sort( ( a, b ) => a.sHour!.compareTo( b.sHour! ) );
+                alarmProvider.lAlarms = alarmProvider.lAlarms;
+                Navigator.pop( context );
+
+              }
+              
             },
             icon: Icon(
               Icons.check_rounded,
@@ -89,10 +103,21 @@ class _CreateAlarmPageState extends State<CreateAlarmPage> {
               onTimeChange: ( hour ) => setState( () => sHour = hour )
             ),
             SizedBox( height: ResponsiveApp.dHeight( 40.0 ) ),
-            TextFieldForms(
-              controller: nameController,
-              sLabel: 'Nombre',
-              dWidth: 328.0
+            Form(
+              key: _formKey,
+              child: TextFieldForms(
+                controller: nameController,
+                sLabel: 'Nombre',
+                dWidth: 328.0,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    setState( () => bError = true );
+                    return 'Por favor ingresa un valor';
+                  }
+                  return null;
+                },
+                bError: bError
+              )
             ),
             SizedBox( height: ResponsiveApp.dHeight( 32.0 ) ),
             Row(
@@ -145,7 +170,7 @@ class _CreateAlarmPageState extends State<CreateAlarmPage> {
                 Padding(
                   padding: EdgeInsets.only( right: ResponsiveApp.dWidth( 12.0 ) ),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => functions.showBottomSheet( context, const BottomSheetSubtask() ),
                     style: TextButton.styleFrom(
                       overlayColor: ColorsApp.primaryColor.withValues( alpha: 0.2 ),
                       shape: RoundedRectangleBorder(
@@ -161,6 +186,12 @@ class _CreateAlarmPageState extends State<CreateAlarmPage> {
                   )
                 )
               ]
+            ),
+            ListView.builder(
+              primary: false,
+              itemCount: alarmProvider.lSubtask.length,
+              shrinkWrap: true,
+              itemBuilder: ( context, index ) => CheckBoxItem( sText: alarmProvider.lSubtask[index][0].toUpperCase() + alarmProvider.lSubtask[index].substring(1) )
             )
           ]
         )
