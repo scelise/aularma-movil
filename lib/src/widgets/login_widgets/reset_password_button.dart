@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../pages/reset_password_page.dart';
-
 import '../../utils/colors_app.dart';
+import '../../utils/functions.dart';
 import '../../utils/responsive_app.dart';
-import '../../utils/slide_transition.dart';
 
 import '../general_widgets/poppins_text.dart';
+import '../reset_password_widgets/bottom_sheet_reset_password.dart';
 
 class ResetPasswordButton extends StatelessWidget {
 
-  const ResetPasswordButton( { super.key } );
+  ResetPasswordButton( { super.key } );
+
+  final functions = Functions();
 
   @override
   Widget build( BuildContext context ) {
@@ -27,7 +28,7 @@ class ResetPasswordButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular( 12.0 )
               )
             ),
-            onPressed: () => Navigator.push( context, SlidePageRoute( page: ResetPasswordPage() ) ),
+            onPressed: () => functions.showBottomSheet( context, BottomSheetResetPassword() ) ,
             child: PoppinsText(
               sText: '¿Olvidaste tu contraseña?', 
               dFontSize: ResponsiveApp.dSize( 14.0 ),

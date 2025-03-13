@@ -11,6 +11,7 @@ class TextFieldForms extends StatefulWidget {
 
   final TextEditingController controller;
   final bool bIsPassword;
+  final bool bEnabled;
   final String sLabel;
   final double dWidth;
 
@@ -20,7 +21,8 @@ class TextFieldForms extends StatefulWidget {
       required this.controller,
       required this.sLabel,
       this.dWidth = 312.0,
-      this.bIsPassword = false
+      this.bIsPassword = false,
+      this.bEnabled = true
     }
   );
 
@@ -38,6 +40,7 @@ class _TextFieldFormsState extends State<TextFieldForms> {
     return SizedBox(
       width: ResponsiveApp.dWidth( widget.dWidth ),
       child: TextFormField(
+        enabled: widget.bEnabled,
         controller: widget.controller,
         obscureText: widget.bIsPassword ? bObscure : false,
         style: GoogleFonts.poppins(
@@ -47,6 +50,10 @@ class _TextFieldFormsState extends State<TextFieldForms> {
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric( horizontal: ResponsiveApp.dWidth( 16.0 ), vertical: ResponsiveApp.dHeight( 18.0 ) ),
           enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular( 8.0 ),
+            borderSide: const BorderSide( color: ColorsApp.borderColor)
+          ),
+          disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular( 8.0 ),
             borderSide: const BorderSide( color: ColorsApp.borderColor)
           ),

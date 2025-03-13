@@ -7,8 +7,8 @@ class ContactsPage extends StatelessWidget {
   @override
   Widget build( BuildContext context ) {
 
-    return Center(
-      child: Text('Contactos'),
+    return const Center(
+      child: Text('Contactos')
     );
 
   }
