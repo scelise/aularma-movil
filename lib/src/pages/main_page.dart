@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../providers/alarm_provider.dart';
+
 import '../utils/colors_app.dart';
 import '../utils/responsive_app.dart';
 import '../utils/slide_transition.dart';
@@ -12,6 +13,7 @@ import '../widgets/general_widgets/poppins_text.dart';
 
 import 'alarms_page.dart';
 import 'contacts_page.dart';
+import 'profile_page.dart';
 import 'settings_page.dart';
 import 'create_alarm_page.dart';
 
@@ -39,7 +41,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         backgroundColor: ColorsApp.backgroundColor,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () => Navigator.push( context, SlidePageRoute( page: const ProfilePage() ) ),
           icon: Icon(
             Icons.account_circle_rounded,
             color: ColorsApp.secondaryColor,

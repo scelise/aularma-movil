@@ -66,7 +66,7 @@ class _BottomSheetResetPasswordState extends State<BottomSheetResetPassword> {
             onPressed: () {
 
               if( _formKey.currentState!.validate() ) {
-                Navigator.push( context, SlidePageRoute( page: ResetPasswordPage() ) );
+                Navigator.push( context, SlidePageRoute( page: const ResetPasswordPage() ) );
               }
 
             },

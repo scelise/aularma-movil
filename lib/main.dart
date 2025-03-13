@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Aularma',
-        home: LoginPage(),
+        home: const LoginPage(),
         theme: ThemeData(
           scaffoldBackgroundColor: ColorsApp.backgroundColor,
           textSelectionTheme: TextSelectionThemeData(

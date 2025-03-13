@@ -28,7 +28,7 @@ class ResetPasswordButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular( 12.0 )
               )
             ),
-            onPressed: () => functions.showBottomSheet( context, BottomSheetResetPassword() ) ,
+            onPressed: () => functions.showBottomSheet( context, const BottomSheetResetPassword() ) ,
             child: PoppinsText(
               sText: '¿Olvidaste tu contraseña?', 
               dFontSize: ResponsiveApp.dSize( 14.0 ),
