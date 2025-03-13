@@ -1,0 +1,2 @@
+C:/Flutter/aularma_movil/android/app/.cxx/RelWithDebInfo/496h4t13/x86_64/CMakeFiles/edit_cache.dir
+C:/Flutter/aularma_movil/android/app/.cxx/RelWithDebInfo/496h4t13/x86_64/CMakeFiles/rebuild_cache.dir
