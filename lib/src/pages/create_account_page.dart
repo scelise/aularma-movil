@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../utils/circular_transition.dart';
 import '../utils/functions.dart';
 import '../utils/responsive_app.dart';
 
@@ -8,6 +9,7 @@ import '../widgets/general_widgets/main_button.dart';
 import '../widgets/general_widgets/text_field_forms.dart';
 import '../widgets/create_account_widgets/bottom_sheet_address.dart';
 import '../widgets/create_account_widgets/create_account_header.dart';
+import 'splash_page.dart';
 
 class CreateAccountPage extends StatelessWidget {
 
@@ -68,7 +70,13 @@ class CreateAccountPage extends StatelessWidget {
                 onPressed: () => functions.showAlertDialog(
                   context,
                   '¡Perfecto!',
-                  'Tu cuenta ha sido creada con éxito'
+                  'Tu cuenta ha sido creada con éxito',
+                  () => Navigator.pushAndRemoveUntil(
+                    context,
+                    CircularTransition( page: const SplashPage() ),
+                    ( route ) => false
+                  ),
+                  bPermission: false
                 )
               )
             ]

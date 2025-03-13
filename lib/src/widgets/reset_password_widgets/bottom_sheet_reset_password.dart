@@ -64,11 +64,9 @@ class _BottomSheetResetPasswordState extends State<BottomSheetResetPassword> {
           ),
           MainButton(
             onPressed: () {
-
               if( _formKey.currentState!.validate() ) {
                 Navigator.push( context, SlidePageRoute( page: const ResetPasswordPage() ) );
               }
-
             },
             sLabel: 'Enviar código'
           ),
