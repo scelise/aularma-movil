@@ -11,11 +11,22 @@ import '../general_widgets/poppins_text.dart';
 import '../general_widgets/text_field_forms.dart';
 import '../general_widgets/title_bottom_sheet.dart';
 
-class BottomSheetResetPassword extends StatelessWidget {
+class BottomSheetResetPassword extends StatefulWidget {
 
-  BottomSheetResetPassword( { super.key } );
+  const BottomSheetResetPassword( { super.key } );
+
+  @override
+  State<BottomSheetResetPassword> createState() => _BottomSheetResetPasswordState();
+
+}
+
+class _BottomSheetResetPasswordState extends State<BottomSheetResetPassword> {
 
   final emailController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  bool bError = false;
 
   @override
   Widget build( BuildContext context ) {
@@ -35,13 +46,30 @@ class BottomSheetResetPassword extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric( vertical: ResponsiveApp.dHeight( 40.0 ) ),
-            child: TextFieldForms(
-              sLabel: 'Correo electrónico',
-              controller: emailController
+            child: Form(
+              key: _formKey,
+              child: TextFieldForms(
+                sLabel: 'Correo electrónico',
+                controller: emailController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    setState( () => bError = true );
+                    return 'Por favor ingresa un valor';
+                  }
+                  return null;
+                },
+                bError: bError
+              )
             )
           ),
           MainButton(
-            onPressed: () => Navigator.push( context, SlidePageRoute( page: ResetPasswordPage() ) ),
+            onPressed: () {
+
+              if( _formKey.currentState!.validate() ) {
+                Navigator.push( context, SlidePageRoute( page: ResetPasswordPage() ) );
+              }
+
+            },
             sLabel: 'Enviar código'
           ),
           SizedBox( height: ResponsiveApp.dHeight( 32.0 ) )
@@ -50,5 +78,4 @@ class BottomSheetResetPassword extends StatelessWidget {
     );
   
   }
-
 }

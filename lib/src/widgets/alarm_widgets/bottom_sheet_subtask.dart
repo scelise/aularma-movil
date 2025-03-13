@@ -21,6 +21,7 @@ class BottomSheetSubtask extends StatefulWidget {
 }
 
 class _BottomSheetSubtaskState extends State<BottomSheetSubtask> {
+  
   final descriptionController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
@@ -51,7 +52,7 @@ class _BottomSheetSubtaskState extends State<BottomSheetSubtask> {
                 }
                 return null;
               },
-              bError: bError,
+              bError: bError
             ),
             Padding(
               padding: EdgeInsets.symmetric( vertical: ResponsiveApp.dHeight( 32.0 ) ),
