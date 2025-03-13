@@ -4,13 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'src/pages/login_page.dart';
-
+import 'src/pages/welcome_page.dart';
 import 'src/providers/alarm_provider.dart';
 import 'src/providers/contacts_provider.dart';
 
 import 'src/utils/colors_app.dart';
-import 'src/utils/responsive_app.dart';
 
 void main() {
 
@@ -36,25 +34,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
   @override
-  void didChangeDependencies() {
-
-    _configureScreenUtils();
-    
-    super.didChangeDependencies();
-
-  }
-
-  void _configureScreenUtils() {
-    
-    ResponsiveApp.init( context, 360, 800 );
-    
-    if ( ResponsiveApp.bTablet() ) {
-      ResponsiveApp.init( context, 900, 1220 );
-    }
-
-  }
-
-  @override
   Widget build( BuildContext context ) {
 
     return MultiProvider(
@@ -65,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Aularma',
-        home: const LoginPage(),
+        home: const WelcomePage(),
         theme: ThemeData(
           scaffoldBackgroundColor: ColorsApp.backgroundColor,
           textSelectionTheme: TextSelectionThemeData(
