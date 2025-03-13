@@ -1,4 +1,4 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'src/pages/login_page.dart';
 
 import 'src/providers/alarm_provider.dart';
+import 'src/providers/contacts_provider.dart';
 
 import 'src/utils/colors_app.dart';
 import 'src/utils/responsive_app.dart';
@@ -58,7 +59,8 @@ class _MyAppState extends State<MyApp> {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create: ( _ ) => AlarmProvider() )
+        ChangeNotifierProvider( create: ( _ ) => AlarmProvider() ),
+        ChangeNotifierProvider( create: ( _ ) => ContactsProvider() )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

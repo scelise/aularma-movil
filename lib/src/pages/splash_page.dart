@@ -29,11 +29,11 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Timer(const Duration(seconds: 2), () {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => MainPage()));
-        });
-      });
+      WidgetsBinding.instance.addPostFrameCallback(
+        ( _ ) => Timer( const Duration(seconds: 2),
+          () => Navigator.pushReplacement( context, MaterialPageRoute( builder: (_) => const MainPage() ) )
+        )
+      );
     }
 
   @override
